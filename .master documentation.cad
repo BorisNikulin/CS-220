@@ -627,7 +627,7 @@
       <DistributorParts />
     </PartType>
   </UsedPartTypes>
-  <Schematic Id="312" ActivePageRef="619">
+  <Schematic Id="312" ActivePageRef="5538">
     <Prop Val="4278190335" Nm="%%SCHWIRECOLOR" />
     <Prop Val="4278190335" Nm="%%SCHLINECOLOR" />
     <Prop Val="100000bu" Nm="%%SCHLINEWIDTH" />
@@ -2696,8 +2696,8 @@
       <Prop Val="4278190080" Nm="%%SCHPINNAMECOLOR" />
       <Prop Val="4278190080" Nm="%%SCHPINNUMCOLOR" />
       <Prop Val="A" Nm="%%SCHPAGEFORMAT" />
-      <Prop Val="64821418bu,45273104bu" Nm="%%SCHPAGEVIEWCENTER" />
-      <Prop Val="55000000bu" Nm="%%SCHPAGEVIEWRADIUS" />
+      <Prop Val="70021016bu,36260516bu" Nm="%%SCHPAGEVIEWCENTER" />
+      <Prop Val="54999997bu" Nm="%%SCHPAGEVIEWRADIUS" />
       <SubNet Id="620" Name="IN0" />
       <SubNet Id="621" Name="IN1" />
       <SubNet Id="622" Name="IN2" />
@@ -12417,8 +12417,8 @@
       <Prop Val="4278190080" Nm="%%SCHPINNAMECOLOR" />
       <Prop Val="4278190080" Nm="%%SCHPINNUMCOLOR" />
       <Prop Val="B" Nm="%%SCHPAGEFORMAT" />
-      <Prop Val="47358468bu,85879668bu" Nm="%%SCHPAGEVIEWCENTER" />
-      <Prop Val="37764616bu" Nm="%%SCHPAGEVIEWRADIUS" />
+      <Prop Val="66161484bu,84134312bu" Nm="%%SCHPAGEVIEWCENTER" />
+      <Prop Val="37764614bu" Nm="%%SCHPAGEVIEWRADIUS" />
       <SubNet Id="6313" Name="SEL1" />
       <SubNet Id="6318" Name="IN" />
       <SubNet Id="6321" Name="N_10_6321" />
@@ -12789,10 +12789,8 @@
       <Prop Val="4278190080" Nm="%%SCHPINNAMECOLOR" />
       <Prop Val="4278190080" Nm="%%SCHPINNUMCOLOR" />
       <Prop Val="B" Nm="%%SCHPAGEFORMAT" />
-      <Prop Val="49976826bu,75962558bu" Nm="%%SCHPAGEVIEWCENTER" />
+      <Prop Val="70573444bu,71324998bu" Nm="%%SCHPAGEVIEWCENTER" />
       <Prop Val="32463525bu" Nm="%%SCHPAGEVIEWRADIUS" />
-      <SubNet Id="6736" Name="SEL1" />
-      <SubNet Id="6745" Name="SEL2" />
       <SubNet Id="6750" Name="IN" />
       <SubNet Id="6828" Name="SEL0" />
       <SubNet Id="6879" Name="N_11_6879" />
@@ -12807,6 +12805,8 @@
       <SubNet Id="7180" Name="E" />
       <SubNet Id="7195" Name="G" />
       <SubNet Id="7202" Name="F" />
+      <SubNet Id="7287" Name="SEL1" />
+      <SubNet Id="7294" Name="SEL2" />
       <SchTie Id="6913" SubNetRef="6828" X="53000000bu" Y="71000000bu" />
       <SchTie Id="6916" SubNetRef="6828" X="53000000bu" Y="85000000bu" />
       <SchTie Id="6921" SubNetRef="6828" X="53000000bu" Y="78000000bu" />
@@ -12869,7 +12869,7 @@
             <Crn X="0bu" Y="0bu" />
           </Poly>
           <SchText Id="5658" String="$%%SCHPORTNETNAME" Rot="0" PtHeight="6" Justify="CenterCenter" Invisible="False" X="-5000000bu" Y="50000bu" />
-          <Pin Id="5656" SubNetRef="6736" X="2000000bu" Y="0bu" Name="" Num="" Ori="Right" Type="Input" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu" />
+          <Pin Id="5656" SubNetRef="7287" X="2000000bu" Y="0bu" Name="" Num="" Ori="Right" Type="Input" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu" />
         </BitBucket>
         <Poly Id="5657">
           <Crn X="0bu" Y="0bu" />
@@ -12880,7 +12880,7 @@
           <Crn X="0bu" Y="0bu" />
         </Poly>
         <SchText Id="5658" String="$%%SCHPORTNETNAME" Rot="0" PtHeight="6" Justify="CenterCenter" Invisible="False" X="-5000000bu" Y="50000bu" />
-        <Pin Id="5656" SubNetRef="6736" X="2000000bu" Y="0bu" Name="" Num="" Ori="Right" Type="Input" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu" />
+        <Pin Id="5656" SubNetRef="7287" X="2000000bu" Y="0bu" Name="" Num="" Ori="Right" Type="Input" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu" />
       </Port>
       <Port Id="5659" SymbolName="" X="25000000bu" Y="61000000bu" Rot="0" Type="OffPageIn" NetName="SEL2">
         <BitBucket>
@@ -12893,7 +12893,7 @@
             <Crn X="0bu" Y="0bu" />
           </Poly>
           <SchText Id="5662" String="$%%SCHPORTNETNAME" Rot="0" PtHeight="6" Justify="CenterCenter" Invisible="False" X="-5000000bu" Y="50000bu" />
-          <Pin Id="5660" SubNetRef="6745" X="2000000bu" Y="0bu" Name="" Num="" Ori="Right" Type="Input" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu" />
+          <Pin Id="5660" SubNetRef="7294" X="2000000bu" Y="0bu" Name="" Num="" Ori="Right" Type="Input" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu" />
         </BitBucket>
         <Poly Id="5661">
           <Crn X="0bu" Y="0bu" />
@@ -12904,7 +12904,7 @@
           <Crn X="0bu" Y="0bu" />
         </Poly>
         <SchText Id="5662" String="$%%SCHPORTNETNAME" Rot="0" PtHeight="6" Justify="CenterCenter" Invisible="False" X="-5000000bu" Y="50000bu" />
-        <Pin Id="5660" SubNetRef="6745" X="2000000bu" Y="0bu" Name="" Num="" Ori="Right" Type="Input" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu" />
+        <Pin Id="5660" SubNetRef="7294" X="2000000bu" Y="0bu" Name="" Num="" Ori="Right" Type="Input" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu" />
       </Port>
       <Section Id="6473" SymbolName="" SectionName="" X="32000000bu" Y="85000000bu" Rot="0" Req="False" SwapId="0" OwningSymbolSet="6472">
         <Prop Val="U???" Nm="%%SCHREFDES" />
@@ -12921,7 +12921,7 @@
           <Pin Id="6475" SubNetRef="6879" X="4000000bu" Y="2000000bu" Name="a" Num="2" Ori="Right" Type="Output" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu">
             <Prop Val="0" Nm="%%SCHPINNUMCOLOR" />
           </Pin>
-          <Pin Id="6476" SubNetRef="6745" X="0bu" Y="-5000000bu" Name="sel[0]" Num="3" Ori="Bottom" Type="Input" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu">
+          <Pin Id="6476" SubNetRef="7287" X="0bu" Y="-5000000bu" Name="sel[0]" Num="3" Ori="Bottom" Type="Input" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu">
             <Prop Val="0" Nm="%%SCHPINNUMCOLOR" />
           </Pin>
           <Pin Id="6477" SubNetRef="6884" X="4000000bu" Y="1000000bu" Name="b" Num="4" Ori="Right" Type="Input" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu">
@@ -12940,7 +12940,7 @@
           <Pin Id="6482" SubNetRef="6891" X="4000000bu" Y="-2000000bu" Name="d" Num="6" Ori="Right" Type="Input" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu">
             <Prop Val="0" Nm="%%SCHPINNUMCOLOR" />
           </Pin>
-          <Pin Id="6483" SubNetRef="6736" X="-1000000bu" Y="-5000000bu" Name="sel[1]" Num="7" Ori="Bottom" Type="Input" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu">
+          <Pin Id="6483" SubNetRef="7294" X="-1000000bu" Y="-5000000bu" Name="sel[1]" Num="7" Ori="Bottom" Type="Input" Shape="Normal" NmOffX="0bu" NmOffY="0bu" NumOffX="0bu" NumOffY="0bu">
             <Prop Val="0" Nm="%%SCHPINNUMCOLOR" />
           </Pin>
           <Line Id="6484" StartX="0bu" StartY="-3000000bu" EndX="0bu" EndY="-2875000bu" />
@@ -13397,11 +13397,6 @@
         <Crn X="28000000bu" Y="85000000bu" />
         <Crn X="27000000bu" Y="85000000bu" />
       </Wire>
-      <Wire Id="6908" StartRef="6476" EndRef="5660">
-        <Crn X="32000000bu" Y="80000000bu" />
-        <Crn X="32000000bu" Y="61000000bu" />
-        <Crn X="27000000bu" Y="61000000bu" />
-      </Wire>
       <Wire Id="6911" StartRef="6913" EndRef="5652">
         <Crn X="53000000bu" Y="71000000bu" />
         <Crn X="53000000bu" Y="63000000bu" />
@@ -13431,11 +13426,6 @@
       <Wire Id="6924" StartRef="6921" EndRef="6916">
         <Crn X="53000000bu" Y="78000000bu" />
         <Crn X="53000000bu" Y="85000000bu" />
-      </Wire>
-      <Wire Id="6925" StartRef="5656" EndRef="6483">
-        <Crn X="27000000bu" Y="62000000bu" />
-        <Crn X="31000000bu" Y="62000000bu" />
-        <Crn X="31000000bu" Y="80000000bu" />
       </Wire>
       <Wire Id="7133" StartRef="6758" EndRef="7039">
         <Crn X="50000000bu" Y="97000000bu" />
@@ -13471,17 +13461,28 @@
         <Crn X="60000000bu" Y="84000000bu" />
         <Crn X="63000000bu" Y="84000000bu" />
       </Wire>
-      <Wire Id="7196" StartRef="6803" EndRef="7191">
-        <Crn X="50000000bu" Y="76000000bu" />
-        <Crn X="62000000bu" Y="76000000bu" />
-        <Crn X="62000000bu" Y="80000000bu" />
-        <Crn X="63000000bu" Y="80000000bu" />
-      </Wire>
       <Wire Id="7203" StartRef="6790" EndRef="7187">
         <Crn X="50000000bu" Y="81000000bu" />
         <Crn X="61000000bu" Y="81000000bu" />
         <Crn X="61000000bu" Y="82000000bu" />
         <Crn X="63000000bu" Y="82000000bu" />
+      </Wire>
+      <Wire Id="7279" StartRef="6803" EndRef="7191">
+        <Crn X="50000000bu" Y="76000000bu" />
+        <Crn X="50000000bu" Y="75000000bu" />
+        <Crn X="62000000bu" Y="75000000bu" />
+        <Crn X="62000000bu" Y="80000000bu" />
+        <Crn X="63000000bu" Y="80000000bu" />
+      </Wire>
+      <Wire Id="7288" StartRef="5656" EndRef="6476">
+        <Crn X="27000000bu" Y="62000000bu" />
+        <Crn X="32000000bu" Y="62000000bu" />
+        <Crn X="32000000bu" Y="80000000bu" />
+      </Wire>
+      <Wire Id="7295" StartRef="5660" EndRef="6483">
+        <Crn X="27000000bu" Y="61000000bu" />
+        <Crn X="31000000bu" Y="61000000bu" />
+        <Crn X="31000000bu" Y="80000000bu" />
       </Wire>
     </SchPage>
   </Schematic>
