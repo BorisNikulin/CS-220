@@ -19,67 +19,50 @@
     D=A
 	@sp         //init stack pointer to some space not likely to be used
 	M=D         //will be an increasing empty stack
-	
-	@isBlack    //used to track if color has changed for interupting
-	M=0
 
-	//since return pointer is always to MAINLOOP or
-	//(saved on the stack and restored)
-	//I can just set it once here
-	@MAINLOOP
+	//set return pointer to FILLSCREEN so the set colors funcs
+	//also start the loop here (jank linking goooooo)
+	//I couldnt be bothered to be proper here since i retrofited (overkilled)
+	//the other functions to a ridiculous degree
+	//FILLSCREEN will also set the return pointer back to MAINLOOP
+	//so it works out (woooo jank coding :D)
+	@FILLSCREEN
 	D=A
 	@R0
-	M=D			//set return pointer to MAINLOOP
+	M=D
 
 (MAINLOOP)
+	//set return pointer to FILLSCREEN so the set colors funcs
+	//also start the loop here (jank linking goooooo)
+	//I couldnt be bothered to be proper here since i retrofited (overkilled)
+	//the other functions to a ridiculous degree
+	//FILLSCREEN will also set the return pointer back to MAINLOOP
+	//so it works out (woooo jank coding :D)
+	@FILLSCREEN
+	D=A
+	@R0
+	M=D
+
 	@KBD
 	D=M			//D=keyboard ascii value
 	
-//	//for fun
-//	@FILLASCII
-//	0;JMP
-	
-	@FILLBLACK
+	@SETBLACK
 	D;JNE		//if key pressed (not 0) fill black (will return to MAINLOOP)
-	@FILLWHITE
+	@SETWHITE
 	0;JMP		//else fill white (will return to MAINLOOP)
-	
-(FILLBLACK)
-	//return pointer already set at the start and will not change
-	D=-1 		//all 1's
-	@R1
-	M=D			//set R1 to all 1's for a black bit pattern
-	@FILLSCREEN
-	0;JMP		//call FILLSCREEN
-
-(FILLWHITE)
-	//return pointer already set at the start and will not change
-	D=0			//all 0's
-	@R1
-	M=D			//set R1 to all 0's for a white bit pattern
-	@FILLSCREEN
-	0;JMP		//call FILLSCREEN
-
-//for fun
-(FILLASCII)
-	//return pointer already set at the start and will not change
-	@KBD
-	D=M			//bit pattern is the ascii bits
-	@MAINLOOP
-	D;JEQ		//if no key pressed do not redraw screen
-	@R1
-	M=D			//set R1 to ascii bit pattern
-	@FILLSCREEN
-	0;JMP		//call FILLSCREEN
-
 
 //Fills screen with bit pattern
 //R0 - return pointer
 //R1 - fill pattern
 //Pre-requirments: none
 (FILLSCREEN)
-	//setting return pointer unnecessary
-	//since FILLSCREEN will not exectute past FILL call
+	//set return pointer to MAINLOOP since I never set it
+	//and have changed the MAINLOOP to use functions
+	//so this will be the place (janky)
+	@MAINLOOP
+	D=A
+	@R0
+	M=D
 	@SCREEN
 	D=A
 	@R2
@@ -87,7 +70,7 @@
 	@24576
 	D=A
 	@R3
-	M=D			//end arg = 24576
+	M=D			//end arg = 24576 (1 address past the end of screen map)
 	@FILLINTERUPTABLE
 	0;JMP		//call FILL(MAINLOOP, R1(fillPattern), SCREEN, 24576)
 	
@@ -100,7 +83,6 @@
 //R4 - pointer to interupt function that must return in R1 not 0 to then jump to address in R2 (if R1 after func is 0 no jump happens to R2)
 //Pre-requirments: none (although for things to happen R3 > R2)
 (FILLINTERUPTABLE)
-    //interput logic
 	//save R0, R1 to stack
 	//(maybe a full stack would have been better)
 	//(feels like no need for double @sp then)
@@ -110,20 +92,27 @@
 	A=M
 	M=D
 	@sp         //R0 is first in stack 
-	M=A+1       //increment stack pointer
-	@R0
+	M=M+1       //increment stack pointer
+	@R1
 	D=M
 	@sp
 	A=M
 	M=D
 	@sp         //R1 is second in stack 
-	M=A+1       //increment stack pointer
+	M=M+1       //increment stack pointer
+	@R2
+	D=M
+	@sp
+	A=M
+	M=D
+	@sp         //R2 is second in stack 
+	M=M+1       //increment stack pointer
 	
-	//stack: R0, R1
+	//stack: R0, R1, R2
 	
 	//set interput func args
 	@FILLINTERUPTFUNCRETURN
-	D=M
+	D=A
 	@R0
 	M=D
 	//call InteruptFunc which will test for an interupt and return a pointer to a func that will run if R1 is not 0 thus setting the bit pattern
@@ -131,6 +120,7 @@
 	0;JMP
     //R1=function result
 	//R2=func pointer to run if func result is not 0
+(FILLINTERUPTFUNCRETURN)
 	@R1
 	D=M
 	@R5
@@ -139,16 +129,20 @@
 	D=M
 	@R6
 	M=D        //R6=func pointer to run on non zero return
-(FILLINTERUPTFUNCRETURN)
 	
-	//restore R1 from stack
-	//R1 will not be used by the modify function
+	//restore R1 and R2 from stack
+	//R1,R2  will not be used by the modify function
 	//R0 will be used though
 	@sp
-	AM=A-1     //decrement stack pointer
+	AM=M-1     //decrement stack pointer
 	D=M        //D=R1       
 	@R1
 	M=D        //R1 poped off stack
+	@sp
+	AM=M-1     //decrement stack pointer
+	D=M        //D=R2       
+	@R2
+	M=D        //R2 poped off stack
 
     //stack: R0
 
@@ -158,15 +152,13 @@
 	D=M
 	
 	@FILLINTERUPTMODIFYRETURN
-	D;JNE       //check for whether further code needs to run
+	D;JEQ       //check for whether further code needs to run (dont interupt (is 0))
 	
 	D=A
-	
 	@R0
 	M=D        //return pointer set to FILLINTERUPTMODIFYRETURN
 
     @R6        //ptr to R6 which is a ptr to a func
-	A=M
 	A=M        //A=func address
 	0;JMP      //if interupt func return is not 0 jump to the modification function
 	//R1 is now modified to the appropriate color and isBlack is updated
@@ -174,7 +166,7 @@
 
     //restore R0 from stack
 	@sp
-	AM=A-1     //decrement stack pointer
+	AM=M-1     //decrement stack pointer
 	D=M        //D=R0      
 	@R0
 	M=D        //R0 poped off stack
@@ -234,29 +226,28 @@
     M=D			//set return func to setWhite in case an interupt is needed
     
 	D=0			//kbd is not down
-	@INTERUPTFUNCKBDEND
-    0;JMP
+//	@INTERUPTFUNCKBDEND
+//  0;JMP
 (INTERUPTFUNCKBDEND)
 	//D is now 1 for kbd down and 0 for kbd up
 	
-    @isWhite
-    D=A-D		//if D != 0 then interupt is needed as current color does not match the dictated color (by kbd)
-    //isWhite will be changed in set color funcs so no need to change here
+    @isBlack
+    D=M-D		//if D != 0 then interupt is needed as current color does not match the dictated color (by kbd)
+    //isBlack will be changed in set color funcs so no need to change here
 	
 	@R1
 	M=D 		//set return value on whether to interupt
 	
 	@R0
 	A=M
-	A=M
 	0;JMP		//return
 
 //Sets R1 to white bit pattern
 //R0 - return pointer
 //Returns:
-	R1 - white bit pattern (all 0's)
+//	R1 - white bit pattern (all 0's)
 //Affects:
-	@isBlack - becomes 0
+//	@isBlack - becomes 0
 (SETWHITE)
 	@isBlack
 	M=0			//isBlack is 0
@@ -267,15 +258,14 @@
 	
 	@R0
 	A=M
-	A=M
 	0;JMP		//return
 
 //Sets R1 to white bit pattern
 //R0 - return pointer
 //Returns:
-	R1 - white bit pattern (all 1's)
+//	R1 - white bit pattern (all 1's)
 //Affects:
-	@isBlack - becomes 1
+//	@isBlack - becomes 1
 (SETBLACK)
 	@isBlack
 	M=1			//isBlack is 1
@@ -286,24 +276,13 @@
 	
 	@R0
 	A=M
-	A=M
 	0;JMP		//return
-
-//if the passed in var is not 0 return an all 1's bit pattern
-//else return an all 0's bit pattern
-//R0 - return pointer
-//R1 - function result from the interupt function
-(MODIFYFUNC)
-    @R1
-	D=M
-	@test
-    M=D
 
 //HW get's posted and this no longer works :C
 //needs to be able to be interputed
 //and i must do it superb overkill fasion :D
 //guess im making a stack now
-/and retrofitting eariler code to be full on functions
+//and retrofitting eariler code to be full on functions
 //or not and copy over the bit pattern setter stuff
 
 //Takes the fill pattern and fills the specified
