@@ -83,7 +83,7 @@
 //R4 - pointer to interupt function that must return in R1 not 0 to then jump to address in R2 (if R1 after func is 0 no jump happens to R2)
 //Pre-requirments: none (although for things to happen R3 > R2)
 (FILLINTERUPTABLE)
-	//save R0, R1 to stack
+	//save R0, R1, R2 to stack
 	//(maybe a full stack would have been better)
 	//(feels like no need for double @sp then)
 	@R0
@@ -105,7 +105,7 @@
 	@sp
 	A=M
 	M=D
-	@sp         //R2 is second in stack 
+	@sp         //R2 is third in stack 
 	M=M+1       //increment stack pointer
 	
 	//stack: R0, R1, R2
@@ -136,13 +136,13 @@
 	@sp
 	AM=M-1     //decrement stack pointer
 	D=M        //D=R1       
-	@R1
+	@R2
 	M=D        //R1 poped off stack
 	@sp
 	AM=M-1     //decrement stack pointer
-	D=M        //D=R2       
-	@R2
-	M=D        //R2 poped off stack
+	D=M        //D=R1       
+	@R1
+	M=D        //R1 poped off stack
 
     //stack: R0
 
@@ -277,41 +277,3 @@
 	@R0
 	A=M
 	0;JMP		//return
-
-//HW get's posted and this no longer works :C
-//needs to be able to be interputed
-//and i must do it superb overkill fasion :D
-//guess im making a stack now
-//and retrofitting eariler code to be full on functions
-//or not and copy over the bit pattern setter stuff
-
-//Takes the fill pattern and fills the specified
-//RAM addresses [R1, R2) with the pattern
-//R0 - return pointer
-//R1 - fill pattern to set each RAM spot with
-//R2 - start RAM location (inclusive)
-//R3 - end RAM location (exclisive)
-//Pre-requirments: none (although for things to happen R3 > R2)
-(FILL)
-	@R2     	//will be loop counter and pointer to current ram spot
-	D=M
-	@R3
-	D=M-D   	//D=end-start
-	@FILLEND
-	D;JLE   	//break if (end-start <= 0)
-	
-	@R1
-	D=M			//D=*R1 (fillPattern)
-	@R2			//A=R2
-	A=M     	//A=*R2
-	M=D			//RAM[*R2]=D (fillPattern)
-	@R2
-	M=M+1   	//ram ptr/loop counter increment
-	
-	@FILL
-	0;JMP		//re loop
-	
-(FILLEND)
-	@R0
-	A=M
-	0;JMP		//jmp to *returnPtr
