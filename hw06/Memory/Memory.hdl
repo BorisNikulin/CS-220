@@ -42,5 +42,4 @@ CHIP Memory {
     
     Mux16(a=outRAM, b=outScreen, sel=address[14], out=outRAMScreen);
     Mux16(a=outRAMScreen, b=outKeyboard, sel=isKBDAddress, out=out);
-    
 }
